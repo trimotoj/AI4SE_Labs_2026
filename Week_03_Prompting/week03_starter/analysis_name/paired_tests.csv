@@ -1,0 +1,7 @@
+metric,left,right,left_only_correct,right_only_correct,p_raw,p_holm
+official,co_star,rtf,0,0,1.0,1.0
+official,co_star,icio,0,0,1.0,1.0
+official,rtf,icio,0,0,1.0,1.0
+name_only,co_star,rtf,5,2,0.453125,0.90625
+name_only,co_star,icio,8,3,0.2265625,0.6796875
+name_only,rtf,icio,7,5,0.7744140625,0.90625

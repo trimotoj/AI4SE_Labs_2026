@@ -1,0 +1,4 @@
+framework,correct,total,execution_accuracy,nonempty_accuracy,empty_accuracy,balanced_accuracy,valid_sql_rate,mean_latency_sec,median_latency_sec,timed_calls
+co_star,43,155,0.27741935483870966,0.0,1.0,0.5,1.0,5.055220883870968,2.098842,155
+rtf,43,155,0.27741935483870966,0.0,1.0,0.5,1.0,2.0948385806451615,1.452016,155
+icio,43,155,0.27741935483870966,0.0,1.0,0.5,1.0,1.758110341935484,1.407105,155

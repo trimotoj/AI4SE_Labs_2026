@@ -1,0 +1,4 @@
+framework,total,successful_api_calls,valid_sql,official_correct,name_correct,gold_empty_name_correct,gold_nonempty_name_correct,mean_latency_approx_seconds
+co_star,155,155,155,43,119,43,76,5.06
+rtf,155,155,155,43,116,43,73,2.09
+icio,155,155,155,43,114,43,71,1.76
