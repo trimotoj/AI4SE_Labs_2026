@@ -19,15 +19,15 @@ The model was **Google Gemini 3.1 Flash-Lite** (`gemini-3.1-flash-lite`) through
 | Supplementary name-only matches | **119/155** | 116/155 | 114/155 |
 | Supplementary name-only accuracy | **76.77%** | 74.84% | 73.55% |
 | Balanced name-only accuracy | **83.93%** | 82.59% | 81.70% |
-| Recorded mean latency, approx. | ~5.06 s | ~2.09 s | **~1.76 s** |
+| Mean client-observed API latency | 5.055 s | 2.095 s | **1.758 s** |
 
 ![Final accuracy](figures/accuracy_comparison.png)
 
 ![Recorded mean latency](figures/mean_latency.png)
 
-These official-metric-equivalent figures were calculated by `analyze_results.py` using the original evaluator’s multiset comparison; running the unmodified official validation script against all three final prediction files remains a recommended independent check. The official metric cannot distinguish these frameworks: every framework matches the 43 questions with empty gold results, and none matches the 112 nonempty gold results as complete `(ID, NAME)` multisets. The separate name-only metric is therefore essential for interpreting this dataset, **but is not a substitute for the official score**. By this measure, CO-STAR is descriptively ahead of RTF by **1.94 percentage points** and ICIO by **3.23 percentage points**. This does not establish a statistically significant advantage (Task 4).
+These values were calculated by `analyze_results.py` using the original evaluator’s multiset comparison. **The unmodified course validation script was subsequently run independently for all three final prediction files** and returned `Correct: 43/155` and `Accuracy: 0.2774 (27.74%)` for CO-STAR, RTF and ICIO (recorded in `../official_validation_results.md`). The official metric cannot distinguish these frameworks: every framework matches the 43 questions with empty gold results, and none matches the 112 nonempty gold results as complete `(ID, NAME)` multisets. The separate name-only metric is therefore essential for interpreting this dataset, **but is not a substitute for the official score**. By this measure, CO-STAR is descriptively ahead of RTF by **1.94 percentage points** and ICIO by **3.23 percentage points**. This does not establish a statistically significant advantage (Task 4).
 
-The recorded mean latency is **about 5.06 seconds for CO-STAR**, **2.09 seconds for RTF** and **1.76 seconds for ICIO**. These numbers are read from the user's truncated console display and are intentionally shown as approximations. `run_experiments.py` measures the final attempt with `time.perf_counter()`; it does **not** include waiting between requests or earlier failed attempts in the same request's recorded latency. The resumed requests, different execution times and network conditions limit causal interpretation. This is client-observed request latency, not isolated on-device inference time.
+The saved `analysis/metrics.csv` gives mean client-observed latencies of **5.0552208839 s for CO-STAR**, **2.0948385806 s for RTF**, and **1.7581103419 s for ICIO**; the table rounds them to three decimals. `run_experiments.py` measures the final attempt with `time.perf_counter()`; it does **not** include waiting between requests or earlier failed attempts in the same request's recorded latency. The resumed requests, different execution times and network conditions limit causal interpretation. This is client-observed request latency, not isolated on-device inference time.
 
 ## Examples of qualitative SQL review
 
@@ -57,4 +57,4 @@ All generated SQL statements were executable, but executability alone does not i
 - `week03_starter/analyze_name_accuracy.py`: supplementary name-only evaluation.
 - `week03_starter/analysis/`, `week03_starter/analysis_name/`: detailed question-level data and figures.
 
-**Evidence note:** Summary figures were built from the final console output supplied by the experimenter. The complete per-question CSV files and exact high-precision latency means were not available for independent re-analysis during report authoring. Those local outputs must be kept and inspected before submission.
+**Evidence:** The submitted repository includes all 465 question-level predictions, 465 status/timing metadata records, exact latency summaries and analysis outputs. The original evaluator was run separately by the experimenter for each final CSV and agreed with the official-style analyzer (43/155 each). Some successful metadata rows retain an earlier retry error string; this is explained in `../week03_starter/README.md`.

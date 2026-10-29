@@ -56,4 +56,4 @@ To rerun it inside `Week_03_Prompting/week03_starter`:
 
 The implementation is kept separate from the official evaluator and does not leak expected IDs or gold result rows into the prompts. If data owner supplies repaired label IDs, the standard full-row exact metric should be recalculated and prioritized. Because the names can be repeated in real data, a future improvement would validate a canonical restaurant identity mapping independently of benchmark answer labels.
 
-**Evidence note:** Numbers above were transcribed from the final output of the user's scripts; review `analysis_name/metrics.csv` and `analysis_name/question_level.csv` before submitting.
+**Evidence:** All supplementary scores can be verified against the committed `../week03_starter/analysis_name/metrics.csv` and question-level `../week03_starter/analysis_name/question_level.csv`.

@@ -1,99 +1,55 @@
-# Week 03 — Text-to-SQL experiment starter
+# Week 03 — Text-to-SQL prompting experiments
 
-This is a reproducible **starter implementation**, not a completed experiment. It does not include generated predictions or measured model scores: those require real API calls. It does not copy the labels into model prompts or hard-code solutions.
+This is the **completed Week 03 experiment**, not an unfinished starter. It compares CO-STAR, RTF and ICIO on 155 restaurant Text-to-SQL questions each (465 successful API responses) using Google Gemini `gemini-3.1-flash-lite`.
 
-## Place the files
+The final reports and interpretation are in [../Week03_Final_Reports_UPDATED/](../Week03_Final_Reports_UPDATED/README.md). See [../README.md](../README.md) for a short submission overview.
 
-Copy this entire `week03_starter` folder into your fork as:
+## Files
 
-```text
-AI4SE_Labs_2026/
-└── Week_03_Prompting/
-    ├── Assignments/
-    │   ├── Task_1/Task_1.md
-    │   ├── Task_2/data/
-    │   │   ├── restaurants_dataset.csv
-    │   │   ├── restaurants-schema.csv
-    │   │   ├── restaurants-db.txt
-    │   │   └── evaluate_retrieval_predictions.py
-    │   └── ...
-    └── week03_starter/
-        ├── prompts.json
-        ├── TASK1_REPORT.md
-        ├── run_experiments.py
-        ├── analyze_results.py
-        └── README.md
-```
+- `prompts.json` — three structured prompting templates, common SQL instructions, schema, and three synthetic few-shot demonstrations.
+- `run_experiments.py` — stateless request runner with checkpoint/resume and API retries.
+- `results/predictions_{co_star,rtf,icio}.csv` — 155 question/SQL pairs per framework in the official evaluator's format.
+- `results/meta_{co_star,rtf,icio}.csv` — model, framework, prompt version, timestamp, request status, and measured latency per question.
+- `analyze_results.py` and `analysis/` — executable-SQL checks, official-style exact result comparison, timings, paired tests and plots.
+- `analyze_name_accuracy.py` and `analysis_name/` — supplementary name-only and balanced name-only metrics, integrity audit, paired tests and plots.
+- `test_solution.py` — offline tests.
+- `../official_validation_results.md` — recorded output of the **unmodified course evaluator** for all three frameworks.
 
-Requires Python 3.10+ and `matplotlib` for figures. The generation script uses only Python's standard library and an **OpenAI-compatible chat-completions HTTP endpoint** (not necessarily OpenAI's models). This is distinct from ChatGPT's UI subscription. Choose an endpoint/model you can access. Never commit an API key.
+## Final results
 
-```bash
+| Framework | Official exact accuracy | Name-only accuracy | Mean client-observed API latency |
+|---|---:|---:|---:|
+| CO-STAR | 43/155 (27.74%) | 119/155 (76.77%) | 5.055 s |
+| RTF | 43/155 (27.74%) | 116/155 (74.84%) | 2.095 s |
+| ICIO | 43/155 (27.74%) | 114/155 (73.55%) | 1.758 s |
+
+The original course evaluator was run independently for each framework's saved prediction CSV; it returned **43/155 (27.74%) for all three**. The low official score is substantially affected by mismatched restaurant IDs in the provided reference data. The supplementary name-only metric is diagnostic, not a replacement for official evaluation; see the Task 3–4 reports.
+
+## Reproduce the analysis (no API key required)
+
+From this directory, with Python 3.10+ and `matplotlib` installed:
+
+```powershell
 python -m pip install matplotlib
+python analyze_results.py --results-dir results
+python analyze_name_accuracy.py --results-dir results
+python -m unittest -v test_solution.py
 ```
 
-## Generate predictions (Task 2)
+For the original evaluator, the input must be named `restaurants_dataset_predictions.csv` under `../Assignments/Task_2/data/`. See [../official_validation_results.md](../official_validation_results.md) for the exact recorded results. Preserve any existing file of that name before temporarily copying a framework's prediction CSV.
 
-Example for an OpenAI-compatible API endpoint:
+## Reproduce model generation (optional; incurs API usage)
 
-```bash
-export LLM_API_KEY='YOUR_API_KEY'        # PowerShell: $env:LLM_API_KEY='YOUR_API_KEY'
-cd Week_03_Prompting/week03_starter
-python run_experiments.py --model YOUR_MODEL_ID --base-url https://api.example.com/v1 --temperature 0
+Set `LLM_API_KEY` privately in the terminal, then run:
+
+```powershell
+python run_experiments.py --model gemini-3.1-flash-lite --base-url https://generativelanguage.googleapis.com/v1beta/openai --out-dir new_results --retries 8 --delay 5 --timeout 120
 ```
 
-Use `--temperature 0` **only if the model supports that option**; otherwise omit it. For local Ollama with a compatible endpoint, try `--base-url http://localhost:11434/v1 --model MODEL_NAME` (assuming the model is available there).
+Do not commit the API key or virtual environment. Running a new generation may produce different SQL or latency values. Use `--resume` only when continuing a compatible run with the same model.
 
-First verify basic connectivity and output shape with a smoke test:
+### Request metadata interpretation
 
-```bash
-python run_experiments.py --model YOUR_MODEL_ID --base-url https://api.example.com/v1 --limit 3 --out-dir smoke_test
-```
+All 465 final metadata rows have `status=ok`. **32 of those rows retain a nonempty `error` field** from an earlier failed attempt (e.g. HTTP 429/503) that succeeded on retry; in the submitted runner, a later successful attempt does not clear that historical error string. The `status` reflects the final outcome, while `latency_seconds` measures only the final attempt and does not include previous failed-attempt durations or retry backoff. These records are preserved as measured, not rewritten to hide transient failures.
 
-Do not use the smoke-test output for your final evaluation. For the complete run, choose a fresh output directory or `--resume` to continue an interrupted run. Each framework is called separately; each question uses an independent message. The output includes model name, framework ID, version of the prompt, UTC timestamp and latency.
-
-Files:
-- `results/predictions_co_star.csv`, `predictions_rtf.csv`, `predictions_icio.csv` — **exact** `question,predicted_sql` CSV format for the original validator.
-- `results/meta_co_star.csv` etc. — prompt/model identifiers, inference time, request status and error details.
-
-On failures, the script records a blank prediction and an error. It deliberately does **not** insert an always-empty SQL query as a fake success. Correct API/model failures before the final official evaluation.
-
-## Verify against the official evaluator
-
-Only after generating all 155 queries for a framework:
-
-```bash
-# Run this from Week_03_Prompting/week03_starter
-cp results/predictions_co_star.csv ../Assignments/Task_2/data/restaurants_dataset_predictions.csv
-python ../Assignments/Task_2/data/evaluate_retrieval_predictions.py
-```
-
-Repeat for `rtf` and `icio`. On Windows PowerShell, use `Copy-Item` instead of `cp` if preferred. The official script will stop at the first invalid SQL query, so inspect/resolve errors if needed; do not alter questions or copy `result` labels into predictions. Do not accidentally commit the temporary `restaurants_dataset_predictions.csv` in multiple versions.
-
-## Additional metrics, figures and statistical tests (Tasks 3–4)
-
-```bash
-python analyze_results.py
-```
-
-The analyzer **uses the original repository's database loader**, executes each query against an in-memory SQLite database, protects the connection from writes, and compares rows as multisets like the official script. Invalid SQL is counted incorrect rather than aborting the whole analysis. A 3-second per-query timeout and 100,000-row cap protect against unexpectedly expensive queries; document any differences if these constraints affect an official result.
-
-It creates:
-- `analysis/metrics.csv`
-- `analysis/question_level_analysis.csv` (for reviewing failures)
-- `analysis/paired_tests.csv`
-- `analysis/accuracy_comparison.png`, `analysis/latency_boxplot.png`
-- `analysis/report.md` (generated results plus prompts for your manual interpretation)
-
-The additional metric is **balanced execution accuracy**: the mean of execution accuracy on gold-empty and gold-nonempty questions. It complements ordinary execution accuracy by giving equal weight to both classes. Across 155 labels, 43 are empty and 112 nonempty (verified on the repository at preparation time).
-
-Task 4 uses **Cochran's Q test** for 3 correlated accuracy vectors and paired **exact McNemar tests with Holm multiple-testing correction**. This is more appropriate than comparing independent proportions, because each prompt answers the same questions. Interpret statistical significance cautiously: one run/model does not establish generality across models/seeds.
-
-Complete the `analysis/report.md` discussion with manually inspected failure examples, trade-offs, exact API model/version, generation parameters, coding agent used, and reasons why the prompts might differ. Do not claim a statistically significant difference unless the calculated test supports it.
-
-## Fairness and anti-leakage safeguards
-
-1. Keep the 3 few-shot demonstrations identical across frameworks. None may include actual label results.
-2. Never pass the `result` column from `restaurants_dataset.csv` into generation prompts.
-3. Avoid hand-editing individual SQL outputs to force matches; change the **general prompt or implementation** and rerun the complete experiment instead.
-4. Save all predictions, prompts, model IDs and metadata, including failed cases, and describe any manual steps.
-5. If prompts are tuned using a development subset, reserve a separate untouched evaluation subset for unbiased comparison; the official provided benchmark can still be reported separately.
+This directory also includes automatically generated `analysis/report.md` containing generic interpretation prompts. The full interpretation and coding-agent discussion are in `../Week03_Final_Reports_UPDATED/Task_4_Report.md`.

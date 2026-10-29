@@ -1,52 +1,37 @@
-# Week 03 — final report package (updated after 465 successful calls)
+# Week 03 — Final reports
 
-This package contains four editable Markdown reports and three figures reflecting the **final** experiment output provided in the conversation. In particular, all framework API failures were resolved. It supersedes **`Week03_Final_Reports.zip`**, which contained older metrics and API failures.
+This folder contains the **completed** reports and charts for the university Week 03 Text-to-SQL prompting assignment. All four tasks are documented, and the underlying predictions, scripts and detailed analyses are committed in the sibling `../week03_starter/` directory. This is not a standalone source-data archive.
 
-**Important evidence limitation:** This package was built from console excerpts and previously reviewed smoke-test cases; the full per-question results, metadata and precise untruncated latency values are **on the experimenter's computer**, not included here. Do not treat the archive as the full submission.
+## Reports
 
-## What to submit
+- [Task 1 — Prompt selection](Task_1_Report.md): CO-STAR, RTF and ICIO; sources, full prompt design and expected trade-offs.
+- [Task 2 — Text-to-SQL comparison](Task_2_Report.md): 155 questions per framework, saved model outputs, executable SQL, accuracy, latency and examples.
+- [Task 3 — New metric](Task_3_Report.md): name-only execution accuracy (NEA), balanced NEA, implementation and limitations.
+- [Task 4 — Statistical comparison](Task_4_Report.md): paired significance tests, figures, model/prompt/coding-agent factors and validity threats.
 
-Keep your existing repository files under `Week_03_Prompting/week03_starter/`:
+The `figures/` directory contains the report charts. `final_summary.csv` contains rounded summary results; **the exact numerical means** are in `../week03_starter/analysis/metrics.csv`. `prompts_reference.json` is a reference copy of the actual `../week03_starter/prompts.json`.
 
-- The *actual* `prompts.json`, final corrected `run_experiments.py`, `analyze_results.py`, `analyze_name_accuracy.py` and other source files.
-- `results/predictions_co_star.csv`, `predictions_rtf.csv`, `predictions_icio.csv` (full 155 rows each) plus `results/meta_*.csv`.
-- `analysis/` and `analysis_name/` including metrics, paired tests, question-level diagnostics and figures.
-- `TASK1_REPORT.md` if already present, or replace/merge with this archive's `Task_1_Report.md`.
+## Final verified results
 
-Copy the entire **`Week03_Final_Reports_UPDATED/`** folder into `Week_03_Prompting/` so its Markdown figure links work. The bundled `prompts_reference.json` is a *reference copy only* of the original design; **do not overwrite an intentionally different final prompt configuration**. The bundled `analyze_name_accuracy.py` can be copied to the existing `week03_starter/` if missing; do not replace newer working code without comparing versions.
-
-## Final accuracy figures
-
-| Framework | Official matches | Name-only matches | Gold-nonempty name matches | Mean recorded latency (approx.) |
+| Framework | Successful calls | Official exact result matches | Name-only result matches | Mean API latency |
 |---|---:|---:|---:|---:|
-| CO-STAR | 43/155 | 119/155 | 76/112 | ~5.06 s |
-| RTF | 43/155 | 116/155 | 73/112 | ~2.09 s |
-| ICIO | 43/155 | 114/155 | 71/112 | ~1.76 s |
+| CO-STAR | 155/155 | 43/155 (27.74%) | 119/155 (76.77%) | 5.055 s |
+| RTF | 155/155 | 43/155 (27.74%) | 116/155 (74.84%) | 2.095 s |
+| ICIO | 155/155 | 43/155 (27.74%) | 114/155 (73.55%) | 1.758 s |
 
-Statistical results: exact Cochran Q `p = 1.0` (identical binary vectors, no discordance), name-only Cochran Q `p = 0.281769`; no Holm-adjusted pairwise McNemar p-value is below `0.05`. **No statistically significant accuracy difference established.**
+The unmodified assignment evaluator **was run on all three final prediction files** and reported `Accuracy: 0.2774 (27.74%)`, `Correct: 43/155` for each. See [official validation transcript](../official_validation_results.md). Both local analyzers' metrics and raw CSV files are preserved alongside the report package.
 
-## Final verification commands (PowerShell)
+The benchmark's reference IDs are inconsistent with the supplied SQLite database (just 3 of 13,235 gold ID/name pairs exist verbatim), so all three frameworks correctly match 43 empty gold results but none of the nonempty full ID/name result sets. Name-only matching adds a useful, weaker measure. Cochran's Q gives name-only `p = 0.281769`; no Holm-adjusted pairwise McNemar test shows a significant difference at 0.05.
 
-From `AI4SE_Labs_2026/Week_03_Prompting/week03_starter`:
+## Reproducibility and caveats
 
-```powershell
-.\.venv\Scripts\python.exe analyze_results.py --results-dir results
-.\.venv\Scripts\python.exe analyze_name_accuracy.py --results-dir results
-```
-
-Optional original validator check for *each* prompt configuration:
+From `../week03_starter/`, with Python 3.10+ and `matplotlib`:
 
 ```powershell
-foreach ($f in @('co_star','rtf','icio')) {
-    Copy-Item ".\results\predictions_$f.csv" "..\Assignments\Task_2\data\restaurants_dataset_predictions.csv" -Force
-    Write-Host "Official validator: $f"
-    .\.venv\Scripts\python.exe ..\Assignments\Task_2\data\evaluate_retrieval_predictions.py
-}
-Remove-Item "..\Assignments\Task_2\data\restaurants_dataset_predictions.csv"
+python analyze_results.py --results-dir results
+python analyze_name_accuracy.py --results-dir results
 ```
 
-The exact accuracy figures in these reports were produced by the local analyzer with official-style multiset comparison, not yet independently verified using the unmodified original evaluator. The original validator may take time to rebuild its database per run. Record its scores without altering labels or manually editing SQL IDs to chase references. This temporary `restaurants_dataset_predictions.csv` is not needed in the committed repository because three model prediction CSVs are already preserved.
+All 465 final `meta_*.csv` rows are marked `ok`. Some successful rows contain the error message from a **prior failed retry attempt** (32 records total); the final status is successful, and the saved latency is the duration of the last successful request rather than total wall-clock retry time. No API credentials are committed.
 
-## Safe commit and push
-
-Run `git status --short` and review changes before committing. Do **not** commit `.venv`, API keys, credentials or temporary backup directories. If the work is still unfinished, annotate the repository README per the assignment. Stage the appropriate Week 03 files, commit, and `git push origin main` before the submission deadline. The **commit timestamp** and a successfully pushed repository matter for grading.
+Full sources and assignment instructions: [Week 03 overview](../README.md).

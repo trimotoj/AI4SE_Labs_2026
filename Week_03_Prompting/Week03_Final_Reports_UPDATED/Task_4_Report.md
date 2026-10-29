@@ -17,7 +17,7 @@ All **155 questions** were answered under three preselected structured prompting
 | Name-only accuracy | **76.77%** | 74.84% | 73.55% |
 | Name-only correct, gold nonempty | **76/112** | 73/112 | 71/112 |
 | Balanced name-only accuracy | **83.93%** | 82.59% | 81.70% |
-| Mean recorded latency (approx.) | ~5.06 s | ~2.09 s | **~1.76 s** |
+| Mean client-observed API latency | 5.055 s | 2.095 s | **1.758 s** |
 | Final non-successful API calls | 0 | 0 | 0 |
 
 ![Exact vs name-only](figures/accuracy_comparison.png)
@@ -26,7 +26,7 @@ All **155 questions** were answered under three preselected structured prompting
 
 ![Mean latency](figures/mean_latency.png)
 
-These exact-result scores come from the project analyzer implementing the original result-multiset comparison. They should be confirmed by running the unmodified course evaluator on each final prediction CSV. The gap between exact and name-only results is the primary finding. **An audit found only 3/13,235 matching ID/name tuples in the real database, versus 13,235/13,235 reference names.** Consequently, the official accuracy is dominated by gold-empty questions and is not a reliable discriminator of semantic SQL quality on the nonempty subset. This is not permission to change SQL to match wrong gold IDs; we preserve the official metric and report a separate weaker diagnostic metric.
+These exact-result scores come from the project analyzer implementing the original result-multiset comparison. **The unmodified course evaluator was also run against each final CSV** and confirmed 43/155 (27.74%) for each framework; see `../official_validation_results.md`. The gap between exact and name-only results is the primary finding. **An audit found only 3/13,235 matching ID/name tuples in the real database, versus 13,235/13,235 reference names.** Consequently, the official accuracy is dominated by gold-empty questions and is not a reliable discriminator of semantic SQL quality on the nonempty subset. This is not permission to change SQL to match wrong gold IDs; we preserve the official metric and report a separate weaker diagnostic metric.
 
 ### Effect sizes (descriptive percentage-point differences)
 
@@ -68,7 +68,7 @@ For the official outcome, the implementation returns Q = 0, p = 1 **by conventio
 
 **AI coding assistance and local orchestration.** ChatGPT assisted with Python runner, analysis scripts and reports; the experiment itself was executed locally in VS Code. All frameworks used one code path, database loader and output normalizer. Therefore coding agents were **not independently varied** and their comparative influence cannot be estimated. Implementation details, input-column hygiene and checkpoint safety mattered for reproducibility; an earlier resume bug and connection resets were repaired, and prior successful prediction records were preserved.
 
-**Latency and request scheduling.** The saved metadata's `latency_seconds` records the **last successful request attempt**, not the entire time spent in retry loops and backoff. Mean figures come from a truncated console printout and should be treated as rounded. CO-STAR averaged ~5.06 s, versus RTF ~2.09 s and ICIO ~1.76 s, but runs occurred at different times and some calls were recovered on resume. No paired timing significance test was performed, and service load, prompt token length and retries can all matter; a causal latency ranking is therefore not justified.
+**Latency and request scheduling.** The saved metadata's `latency_seconds` records the **last successful request attempt**, not the entire time spent in retry loops and backoff. Mean figures were verified against the committed `analysis/metrics.csv` (5.0552208839, 2.0948385806 and 1.7581103419 seconds for CO-STAR, RTF and ICIO respectively). Thus CO-STAR averaged ~5.06 s, versus RTF ~2.09 s and ICIO ~1.76 s, but runs occurred at different times and some calls were recovered on resume. No paired timing significance test was performed, and service load, prompt token length and retries can all matter; a causal latency ranking is therefore not justified.
 
 **Data validity and metric choice.** Gold IDs do not match the supplied database. The official exact-multiset measure thus mainly rewards empty results and is unable to distinguish semantic quality on returned restaurant names. NEA permits diagnosis but cannot distinguish restaurants with equal names. The 43/112 class split can also inflate headline accuracy; balanced NEA partly addresses this.
 
@@ -95,4 +95,4 @@ These are qualitative spot checks from the original 12-question smoke test, not 
 
 **CO-STAR has the highest observed name-only accuracy (76.77%), but neither the global nor pairwise accuracy tests show a statistically significant difference.** The three frameworks have identical official exact execution accuracy (27.74%) because every correctly matched gold result is empty and the reference IDs for nonempty cases are largely inconsistent. A structured prompt may improve some generated queries, but this experiment supports only a **descriptive** ranking of CO-STAR > RTF > ICIO for name matching. Better controlled timing runs and an independently corrected benchmark would be needed for stronger conclusions.
 
-**Evidence limitation:** Aggregate findings derive from the experimenter's final console output, not direct inspection of their local raw result files. Numbers should be rechecked against the preserved CSVs before submission.
+**Evidence:** The repository preserves all final prediction CSVs, model and latency metadata, question-level analyses, exact aggregate metrics and the experimenter's recorded official-validator output. In the submitted metadata, 32 `status=ok` records retain a nonempty `error` from an earlier unsuccessful retry; this does not indicate a failed final response. See `../week03_starter/README.md`.
