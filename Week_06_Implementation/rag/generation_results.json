@@ -1,0 +1,766 @@
+{
+  "artifact_version": 1,
+  "status": "completed",
+  "generation_model": "gpt-5-mini",
+  "embedding_model": "text-embedding-3-small",
+  "top_n": 5,
+  "embeddings_sha256": "81374ecada2a998b75a6d18e5a3bebdc0a5d5d184b59016b84a6867ae5cd56d1",
+  "baseline_tests": {
+    "command": [
+      "C:\\Users\\timotej\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests"
+    ],
+    "exit_code": 1,
+    "tests_run": 481,
+    "failures": 35,
+    "errors": 17,
+    "output_tail": "======================================================================\nFAIL: test_full_discount_yields_zero (test_pricing.BulkDiscountPriceTests.test_full_discount_yields_zero)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\timotej\\Documents\\AI4SE_Labs_2026\\Week_06_Implementation\\AI4SE_Playground\\playground\\tests\\test_pricing.py\", line 149, in test_full_discount_yields_zero\n    self.assertEqual(d.price(items), Money(0))\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: None != Money(0)\n\n======================================================================\nFAIL: test_quantity_summed_across_lines (test_pricing.BulkDiscountPriceTests.test_quantity_summed_across_lines)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\timotej\\Documents\\AI4SE_Labs_2026\\Week_06_Implementation\\AI4SE_Playground\\playground\\tests\\test_pricing.py\", line 133, in test_quantity_summed_across_lines\n    self.assertEqual(d.price(items), Money(1080))\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: None != Money(1080)\n\n======================================================================\nFAIL: test_wraps_base_with_tax (test_pricing.BulkDiscountPriceTests.test_wraps_base_with_tax)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\timotej\\Documents\\AI4SE_Labs_2026\\Week_06_Implementation\\AI4SE_Playground\\playground\\tests\\test_pricing.py\", line 155, in test_wraps_base_with_tax\n    self.assertEqual(d.price(items), Money(990))\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: None != Money(990)\n\n======================================================================\nFAIL: test_zero_percent_returns_base_even_above_threshold (test_pricing.BulkDiscountPriceTests.test_zero_percent_returns_base_even_above_threshold)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\timotej\\Documents\\AI4SE_Labs_2026\\Week_06_Implementation\\AI4SE_Playground\\playground\\tests\\test_pricing.py\", line 138, in test_zero_percent_returns_base_even_above_threshold\n    self.assertEqual(d.price(items), Money(500))\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: None != Money(500)\n\n======================================================================\nFAIL: test_returns_warehouse_with_three_skus_each_20 (test_simulation.BuildDefaultWarehouseTests.test_returns_warehouse_with_three_skus_each_20)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\timotej\\Documents\\AI4SE_Labs_2026\\Week_06_Implementation\\AI4SE_Playground\\playground\\tests\\test_simulation.py\", line 291, in test_returns_warehouse_with_three_skus_each_20\n    self.assertEqual(\n    ~~~~~~~~~~~~~~~~^\n        wh.stock_report(), {\"EL-1001\": 20, \"GR-2001\": 20, \"HW-3001\": 20}\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\nAssertionError: None != {'EL-1001': 20, 'GR-2001': 20, 'HW-3001': 20}\n\n======================================================================\nFAIL: test_cancel_path_releases_reservation (test_simulation.SimulationStepTests.test_cancel_path_releases_reservation)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\timotej\\Documents\\AI4SE_Labs_2026\\Week_06_Implementation\\AI4SE_Playground\\playground\\tests\\test_simulation.py\", line 219, in test_cancel_path_releases_reservation\n    self.assertIsNotNone(cancelled_order)\n    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^\nAssertionError: unexpectedly None\n\n======================================================================\nFAIL: test_shipped_path_publishes_and_adds_revenue (test_simulation.SimulationStepTests.test_shipped_path_publishes_and_adds_revenue)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\timotej\\Documents\\AI4SE_Labs_2026\\Week_06_Implementation\\AI4SE_Playground\\playground\\tests\\test_simulation.py\", line 199, in test_shipped_path_publishes_and_adds_revenue\n    self.fail(\"no shipped order produced\")\n    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: no shipped order produced\n\n======================================================================\nFAIL: test_step_returns_order_and_accounts_for_it (test_simulation.SimulationStepTests.test_step_returns_order_and_accounts_for_it)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\timotej\\Documents\\AI4SE_Labs_2026\\Week_06_Implementation\\AI4SE_Playground\\playground\\tests\\test_simulation.py\", line 166, in test_step_returns_order_and_accounts_for_it\n    self.assertIn(order.status, (OrderStatus.SHIPPED, OrderStatus.CANCELLED))\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: None not found in (<OrderStatus.SHIPPED: 'shipped'>, <OrderStatus.CANCELLED: 'cancelled'>)\n\n----------------------------------------------------------------------\nRan 481 tests in 0.104s\n\nFAILED (failures=35, errors=17)"
+  },
+  "final_tests": {
+    "command": [
+      "C:\\Users\\timotej\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests"
+    ],
+    "exit_code": 1,
+    "tests_run": 481,
+    "failures": 0,
+    "errors": 7,
+    "output_tail": "\n======================================================================\nERROR: test_at_threshold_applies_discount (test_pricing.BulkDiscountPriceTests.test_at_threshold_applies_discount)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\timotej\\Documents\\AI4SE_Labs_2026\\Week_06_Implementation\\AI4SE_Playground\\playground\\tests\\test_pricing.py\", line 127, in test_at_threshold_applies_discount\n    self.assertEqual(d.price(items), Money(2700))\n                     ~~~~~~~^^^^^^^\n  File \"C:\\Users\\timotej\\Documents\\AI4SE_Labs_2026\\Week_06_Implementation\\AI4SE_Playground\\playground\\playground\\pricing.py\", line 68, in price\n    discount = (base.amount * self._percent_off) // 100\n                ^^^^^^^^^^^\nAttributeError: 'Money' object has no attribute 'amount'\n\n======================================================================\nERROR: test_call_matches_price (test_pricing.BulkDiscountPriceTests.test_call_matches_price)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\timotej\\Documents\\AI4SE_Labs_2026\\Week_06_Implementation\\AI4SE_Playground\\playground\\tests\\test_pricing.py\", line 164, in test_call_matches_price\n    self.assertEqual(d(items), d.price(items))\n                     ~^^^^^^^\n  File \"C:\\Users\\timotej\\Documents\\AI4SE_Labs_2026\\Week_06_Implementation\\AI4SE_Playground\\playground\\playground\\base.py\", line 43, in __call__\n    return self.price(items)\n           ~~~~~~~~~~^^^^^^^\n  File \"C:\\Users\\timotej\\Documents\\AI4SE_Labs_2026\\Week_06_Implementation\\AI4SE_Playground\\playground\\playground\\pricing.py\", line 68, in price\n    discount = (base.amount * self._percent_off) // 100\n                ^^^^^^^^^^^\nAttributeError: 'Money' object has no attribute 'amount'\n\n======================================================================\nERROR: test_discount_uses_floor_division (test_pricing.BulkDiscountPriceTests.test_discount_uses_floor_division)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\timotej\\Documents\\AI4SE_Labs_2026\\Week_06_Implementation\\AI4SE_Playground\\playground\\tests\\test_pricing.py\", line 144, in test_discount_uses_floor_division\n    self.assertEqual(d.price(items), Money(300))\n                     ~~~~~~~^^^^^^^\n  File \"C:\\Users\\timotej\\Documents\\AI4SE_Labs_2026\\Week_06_Implementation\\AI4SE_Playground\\playground\\playground\\pricing.py\", line 68, in price\n    discount = (base.amount * self._percent_off) // 100\n                ^^^^^^^^^^^\nAttributeError: 'Money' object has no attribute 'amount'\n\n======================================================================\nERROR: test_full_discount_yields_zero (test_pricing.BulkDiscountPriceTests.test_full_discount_yields_zero)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\timotej\\Documents\\AI4SE_Labs_2026\\Week_06_Implementation\\AI4SE_Playground\\playground\\tests\\test_pricing.py\", line 149, in test_full_discount_yields_zero\n    self.assertEqual(d.price(items), Money(0))\n                     ~~~~~~~^^^^^^^\n  File \"C:\\Users\\timotej\\Documents\\AI4SE_Labs_2026\\Week_06_Implementation\\AI4SE_Playground\\playground\\playground\\pricing.py\", line 68, in price\n    discount = (base.amount * self._percent_off) // 100\n                ^^^^^^^^^^^\nAttributeError: 'Money' object has no attribute 'amount'\n\n======================================================================\nERROR: test_quantity_summed_across_lines (test_pricing.BulkDiscountPriceTests.test_quantity_summed_across_lines)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\timotej\\Documents\\AI4SE_Labs_2026\\Week_06_Implementation\\AI4SE_Playground\\playground\\tests\\test_pricing.py\", line 133, in test_quantity_summed_across_lines\n    self.assertEqual(d.price(items), Money(1080))\n                     ~~~~~~~^^^^^^^\n  File \"C:\\Users\\timotej\\Documents\\AI4SE_Labs_2026\\Week_06_Implementation\\AI4SE_Playground\\playground\\playground\\pricing.py\", line 68, in price\n    discount = (base.amount * self._percent_off) // 100\n                ^^^^^^^^^^^\nAttributeError: 'Money' object has no attribute 'amount'\n\n======================================================================\nERROR: test_wraps_base_with_tax (test_pricing.BulkDiscountPriceTests.test_wraps_base_with_tax)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\timotej\\Documents\\AI4SE_Labs_2026\\Week_06_Implementation\\AI4SE_Playground\\playground\\tests\\test_pricing.py\", line 155, in test_wraps_base_with_tax\n    self.assertEqual(d.price(items), Money(990))\n                     ~~~~~~~^^^^^^^\n  File \"C:\\Users\\timotej\\Documents\\AI4SE_Labs_2026\\Week_06_Implementation\\AI4SE_Playground\\playground\\playground\\pricing.py\", line 68, in price\n    discount = (base.amount * self._percent_off) // 100\n                ^^^^^^^^^^^\nAttributeError: 'Money' object has no attribute 'amount'\n\n----------------------------------------------------------------------\nRan 481 tests in 0.056s\n\nFAILED (errors=7)"
+  },
+  "original_files": {
+    "playground/playground/enums.py": "\"\"\"Enumerations used throughout the playground package.\"\"\"\n\nfrom __future__ import annotations\n\nfrom enum import Enum\n\n\nclass Category(Enum):\n    \"\"\"Product categories within the warehouse catalogue.\"\"\"\n\n    ELECTRONICS = \"electronics\"\n    GROCERY = \"grocery\"\n    APPAREL = \"apparel\"\n    HARDWARE = \"hardware\"\n\n    @classmethod\n    def from_label(cls, label: str) -> \"Category\":\n        \"\"\"Resolve a category from its lowercase label string.\n\n        Raises:\n            TypeError: if ``label`` is not a string.\n            ValueError: if no member has a matching value.\n        \"\"\"\n        if not isinstance(label, str):\n            raise TypeError(\"category label must be str\")\n        key = label.strip().lower()\n        for member in cls:\n            if member.value == key:\n                return member\n        raise ValueError(f\"unknown category: {label!r}\")\n\n    def __str__(self) -> str:\n        \"\"\"Return the category's value as its string form.\"\"\"\n        return self.value\n\n\nclass OrderStatus(Enum):\n    \"\"\"Lifecycle stages for an order.\"\"\"\n\n    NEW = \"new\"\n    RESERVED = \"reserved\"\n    SHIPPED = \"shipped\"\n    CANCELLED = \"cancelled\"\n\n    @property\n    def is_terminal(self) -> bool:\n        pass\n\n\nclass EventType(Enum):\n    \"\"\"Event bus topics published by simulation activity.\"\"\"\n\n    STOCK_ADDED = 1\n    STOCK_RESERVED = 2\n    STOCK_RELEASED = 3\n    ORDER_SHIPPED = 4\n    ORDER_CANCELLED = 5\n",
+    "playground/playground/inventory.py": "\"\"\"Inventory ledger and warehouse location.\"\"\"\n\nfrom __future__ import annotations\n\nfrom typing import Dict, Iterator\n\nfrom .base import Entity, Repository\nfrom .exceptions import InvalidTransitionError, OutOfStockError, UnknownSKUError\nfrom .util import ensure_positive_int, normalize_sku\n\n\nclass InventoryLedger:\n    \"\"\"Tracks on-hand and reserved quantities per SKU.\"\"\"\n\n    def __init__(self, product_repo: Repository) -> None:\n        \"\"\"Create a ledger backed by ``product_repo`` for SKU validation.\"\"\"\n        if not isinstance(product_repo, Repository):\n            raise TypeError(\"product_repo must be a Repository\")\n        self._product_repo = product_repo\n        self._on_hand: Dict[str, int] = {}\n        self._reserved: Dict[str, int] = {}\n\n    def _require_sku(self, sku: str) -> str:\n        \"\"\"Normalise ``sku`` and raise ``UnknownSKUError`` if it is unregistered.\"\"\"\n        sku = normalize_sku(sku)\n        if sku not in self._product_repo:\n            raise UnknownSKUError(sku)\n        return sku\n\n    def add_stock(self, sku: str, quantity: int) -> int:\n        \"\"\"Add ``quantity`` to on-hand stock for ``sku``; return the new total.\"\"\"\n        quantity = ensure_positive_int(quantity, \"quantity\")\n        sku = self._require_sku(sku)\n        self._on_hand[sku] = self._on_hand.get(sku, 0) + quantity\n        return self._on_hand[sku]\n\n    def available(self, sku: str) -> int:\n        \"\"\"Return on-hand minus reserved for ``sku``.\"\"\"\n        sku = self._require_sku(sku)\n        return self._on_hand.get(sku, 0) - self._reserved.get(sku, 0)\n\n    def reserve(self, sku: str, quantity: int) -> ReservationContext:\n        \"\"\"Reserve ``quantity`` of ``sku`` and return a context that can commit or release it.\"\"\"\n        quantity = ensure_positive_int(quantity, \"quantity\")\n        sku = self._require_sku(sku)\n        avail = self.available(sku)\n        if quantity > avail:\n            raise OutOfStockError(sku, quantity, avail)\n        self._reserved[sku] = self._reserved.get(sku, 0) + quantity\n        return ReservationContext(self, sku, quantity)\n\n    def release(self, sku: str, quantity: int) -> None:\n        \"\"\"Release ``quantity`` previously reserved for ``sku``.\"\"\"\n        quantity = ensure_positive_int(quantity, \"quantity\")\n        sku = self._require_sku(sku)\n        reserved = self._reserved.get(sku, 0)\n        if quantity > reserved:\n            raise InvalidTransitionError(reserved, quantity)\n        self._reserved[sku] = reserved - quantity\n\n    def commit(self, sku: str, quantity: int) -> None:\n        \"\"\"Commit ``quantity`` of ``sku``: decrement both reserved and on-hand.\"\"\"\n        quantity = ensure_positive_int(quantity, \"quantity\")\n        sku = self._require_sku(sku)\n        reserved = self._reserved.get(sku, 0)\n        if quantity > reserved:\n            raise InvalidTransitionError(reserved, quantity)\n        self._reserved[sku] = reserved - quantity\n        self._on_hand[sku] = self._on_hand.get(sku, 0) - quantity\n\n    def __contains__(self, sku: object) -> bool:\n        pass\n\n    def __len__(self) -> int:\n        \"\"\"Return the number of SKUs with positive on-hand stock.\"\"\"\n        return sum(1 for qty in self._on_hand.values() if qty > 0)\n\n    def __iter__(self) -> Iterator[str]:\n        \"\"\"Iterate over SKUs with positive on-hand stock, in sorted order.\"\"\"\n        for sku in sorted(k for k, v in self._on_hand.items() if v > 0):\n            yield sku\n\n\nclass ReservationContext:\n    \"\"\"Context manager for a reservation; releases on exit unless committed.\"\"\"\n\n    def __init__(self, ledger: InventoryLedger, sku: str, quantity: int) -> None:\n        \"\"\"Create a held reservation for ``quantity`` of ``sku`` in ``ledger``.\"\"\"\n        self._ledger = ledger\n        self._sku = sku\n        self._quantity = quantity\n        self._state = \"held\"\n\n    @property\n    def state(self) -> str:\n        \"\"\"Return the current reservation state.\"\"\"\n        return self._state\n\n    def __enter__(self) -> ReservationContext:\n        \"\"\"Enter the context; raises if the reservation is not in the held state.\"\"\"\n        if self._state != \"held\":\n            raise InvalidTransitionError(self._state, \"held\")\n        return self\n\n    def __exit__(self, exc_type: object, exc: object, tb: object) -> bool:\n        \"\"\"Release the reservation on exit unless it was committed.\"\"\"\n        if self._state == \"held\":\n            self._ledger.release(self._sku, self._quantity)\n            self._state = \"released\"\n        return False\n\n    def commit(self) -> None:\n        \"\"\"Commit the reservation, decrementing stock; raises if not held.\"\"\"\n        if self._state != \"held\":\n            raise InvalidTransitionError(self._state, \"committed\")\n        self._ledger.commit(self._sku, self._quantity)\n        self._state = \"committed\"\n\n    def __repr__(self) -> str:\n        \"\"\"Return a developer-friendly representation.\"\"\"\n        return f\"ReservationContext({self._sku!r}, {self._quantity}, {self._state!r})\"\n\n\nclass Warehouse(Entity):\n    \"\"\"Named location owning an :class:`InventoryLedger`.\"\"\"\n\n    def __init__(self, warehouse_id: str, name: str, ledger: InventoryLedger) -> None:\n        \"\"\"Create a warehouse with the given id, name, and ledger.\"\"\"\n        if not isinstance(warehouse_id, str) or warehouse_id.strip() == \"\":\n            raise ValueError(\"warehouse_id required\")\n        if not isinstance(ledger, InventoryLedger):\n            raise TypeError(\"ledger must be InventoryLedger\")\n        self._warehouse_id = warehouse_id\n        self._name = name\n        self._ledger = ledger\n\n    def identity(self) -> str:\n        \"\"\"Return the warehouse_id as the entity identity.\"\"\"\n        return self._warehouse_id\n\n    @property\n    def ledger(self) -> InventoryLedger:\n        \"\"\"Return the warehouse inventory ledger.\"\"\"\n        return self._ledger\n\n    def receive(self, sku: str, quantity: int) -> int:\n        \"\"\"Add stock to the warehouse ledger; return the new on-hand total.\"\"\"\n        return self._ledger.add_stock(sku, quantity)\n\n    def stock_report(self) -> Dict[str, int]:\n        pass\n\n    def __repr__(self) -> str:\n        \"\"\"Return a developer-friendly representation.\"\"\"\n        return f\"Warehouse({self._warehouse_id!r}, {self._name!r})\"\n",
+    "playground/playground/orders.py": "\"\"\"Order state-machine, order aggregates, builder, and log.\"\"\"\n\nfrom __future__ import annotations\n\nfrom typing import Dict, FrozenSet, Iterator, List, Tuple\n\nfrom .base import PricingStrategy\nfrom .enums import OrderStatus\nfrom .exceptions import DuplicateEntityError, InvalidTransitionError\nfrom .models import Customer, LineItem, Money\nfrom .pricing import FlatPricing\n\n\nclass OrderStateMachine:\n    \"\"\"Legal OrderStatus transitions, data-driven via TRANSITIONS.\"\"\"\n\n    TRANSITIONS: Dict[OrderStatus, FrozenSet[OrderStatus]] = {\n        OrderStatus.NEW: frozenset({OrderStatus.RESERVED, OrderStatus.CANCELLED}),\n        OrderStatus.RESERVED: frozenset({OrderStatus.SHIPPED, OrderStatus.CANCELLED}),\n        OrderStatus.SHIPPED: frozenset(),\n        OrderStatus.CANCELLED: frozenset(),\n    }\n\n    @staticmethod\n    def allowed_from(status: OrderStatus) -> FrozenSet[OrderStatus]:\n        \"\"\"Return the set of statuses reachable from ``status``.\"\"\"\n        if not isinstance(status, OrderStatus):\n            raise TypeError(\"status must be OrderStatus\")\n        return OrderStateMachine.TRANSITIONS[status]\n\n    def can_transition(self, source: OrderStatus, target: OrderStatus) -> bool:\n        \"\"\"Return whether ``target`` is reachable from ``source``.\"\"\"\n        return target in OrderStateMachine.allowed_from(source)\n\n    def transition(self, source: OrderStatus, target: OrderStatus) -> OrderStatus:\n        pass\n\n    def __call__(self, source: OrderStatus, target: OrderStatus) -> OrderStatus:\n        \"\"\"Convenience alias for :meth:`transition`.\"\"\"\n        return self.transition(source, target)\n\n\nclass Order:\n    \"\"\"Customer order with items, status, and pricing.\"\"\"\n\n    def __init__(self, order_id: str, customer: Customer, pricing: PricingStrategy) -> None:\n        \"\"\"Create a new order in the NEW status for ``customer``.\"\"\"\n        if not isinstance(order_id, str) or order_id.strip() == \"\":\n            raise ValueError(\"order_id required\")\n        if not isinstance(customer, Customer):\n            raise TypeError(\"customer must be Customer\")\n        if not isinstance(pricing, PricingStrategy):\n            raise TypeError(\"pricing must be PricingStrategy\")\n        self._order_id = order_id\n        self._customer = customer\n        self._pricing = pricing\n        self._items: List[LineItem] = []\n        self._status: OrderStatus = OrderStatus.NEW\n        self._machine = OrderStateMachine()\n\n    @property\n    def order_id(self) -> str:\n        \"\"\"Return the order identity.\"\"\"\n        return self._order_id\n\n    @property\n    def customer(self) -> Customer:\n        \"\"\"Return the owning customer.\"\"\"\n        return self._customer\n\n    @property\n    def status(self) -> OrderStatus:\n        \"\"\"Return the current order status.\"\"\"\n        return self._status\n\n    @property\n    def items(self) -> Tuple[LineItem, ...]:\n        \"\"\"Return a tuple copy of the order's line items.\"\"\"\n        return tuple(self._items)\n\n    @property\n    def total(self) -> Money:\n        \"\"\"Return the total price of all line items under this order's pricing.\"\"\"\n        return self._pricing.price(self._items)\n\n    def add_item(self, item: LineItem) -> None:\n        \"\"\"Append ``item``, merging with an existing line for the same SKU.\"\"\"\n        if not isinstance(item, LineItem):\n            raise TypeError(\"item must be LineItem\")\n        if self._status is not OrderStatus.NEW:\n            raise InvalidTransitionError(self._status, OrderStatus.NEW)\n        for index, existing in enumerate(self._items):\n            if existing.sku == item.sku:\n                self._items[index] = existing.with_quantity(existing.quantity + item.quantity)\n                return\n        self._items.append(item)\n\n    def advance(self, target: OrderStatus) -> None:\n        \"\"\"Transition the order to ``target`` status, raising if not allowed.\"\"\"\n        new_status = self._machine.transition(self._status, target)\n        self._status = new_status\n\n    def __len__(self) -> int:\n        pass\n\n    def __iter__(self) -> Iterator[LineItem]:\n        \"\"\"Iterate over a tuple snapshot of the order's line items.\"\"\"\n        return iter(tuple(self._items))\n\n    def __eq__(self, other: object) -> bool:\n        \"\"\"Compare orders by identity.\"\"\"\n        if not isinstance(other, Order):\n            return NotImplemented\n        return self._order_id == other._order_id\n\n    def __hash__(self) -> int:\n        \"\"\"Hash by type name and order id.\"\"\"\n        return hash((\"Order\", self._order_id))\n\n    def __repr__(self) -> str:\n        \"\"\"Return a developer-friendly representation.\"\"\"\n        return f\"Order({self._order_id!r}, {self._status.value})\"\n\n\nclass OrderBuilder:\n    \"\"\"Fluent construction of an :class:`Order`.\"\"\"\n\n    def __init__(self, customer: Customer, pricing: PricingStrategy) -> None:\n        \"\"\"Create a builder for ``customer`` and ``pricing``.\"\"\"\n        if not isinstance(customer, Customer):\n            raise TypeError(\"customer must be Customer\")\n        if not isinstance(pricing, PricingStrategy):\n            raise TypeError(\"pricing must be PricingStrategy\")\n        self._customer = customer\n        self._pricing = pricing\n        self._lines: List[Tuple[str, int, Money]] = []\n\n    @classmethod\n    def for_customer(cls, customer: Customer) -> OrderBuilder:\n        \"\"\"Create a builder with default :class:`FlatPricing` for ``customer``.\"\"\"\n        return cls(customer, FlatPricing())\n\n    def add(self, sku: str, quantity: int, unit_price: Money) -> OrderBuilder:\n        \"\"\"Record a line item and return self for chaining.\"\"\"\n        item = LineItem(sku, quantity, unit_price)\n        self._lines.append((item.sku, item.quantity, item.unit_price))\n        return self\n\n    def build(self, order_id: str) -> Order:\n        \"\"\"Construct and return the order; raises if no lines were recorded.\"\"\"\n        if len(self._lines) == 0:\n            raise ValueError(\"no items\")\n        order = Order(order_id, self._customer, self._pricing)\n        for sku, quantity, unit_price in self._lines:\n            order.add_item(LineItem(sku, quantity, unit_price))\n        return order\n\n    def __len__(self) -> int:\n        \"\"\"Return the number of recorded lines.\"\"\"\n        return len(self._lines)\n\n    def __bool__(self) -> bool:\n        \"\"\"Return True when at least one line has been recorded.\"\"\"\n        return len(self) > 0\n\n\nclass OrderLog:\n    \"\"\"Ordered, deduplicated record of orders; iterable.\"\"\"\n\n    def __init__(self) -> None:\n        \"\"\"Create an empty order log.\"\"\"\n        self._orders: List[Order] = []\n\n    def record(self, order: Order) -> None:\n        \"\"\"Append ``order``; raises if an order with the same id is already logged.\"\"\"\n        if not isinstance(order, Order):\n            raise TypeError(\"order must be Order\")\n        for existing in self._orders:\n            if existing.order_id == order.order_id:\n                raise DuplicateEntityError(order.order_id)\n        self._orders.append(order)\n\n    def by_status(self, status: OrderStatus) -> Iterator[Order]:\n        pass\n\n    def __getitem__(self, index: int) -> Order:\n        \"\"\"Return the order at ``index``.\"\"\"\n        return self._orders[index]\n\n    def __len__(self) -> int:\n        \"\"\"Return the number of logged orders.\"\"\"\n        return len(self._orders)\n\n    def __iter__(self) -> Iterator[Order]:\n        \"\"\"Iterate over the logged orders.\"\"\"\n        yield from list(self._orders)\n",
+    "playground/playground/models.py": "\"\"\"Core domain models: money, products, line items, and customers.\"\"\"\n\nfrom __future__ import annotations\n\nfrom typing import Mapping\n\nfrom .base import Entity\nfrom .enums import Category\nfrom .util import ensure_positive_int, format_cents, normalize_sku\n\n\nclass Money:\n    \"\"\"Immutable integer-cents amount.\"\"\"\n\n    def __init__(self, cents: int = 0) -> None:\n        \"\"\"Create a monetary amount; cents must be a non-negative ``int``.\"\"\"\n        if isinstance(cents, bool) or not isinstance(cents, int):\n            raise TypeError(\"cents must be int\")\n        if cents < 0:\n            raise ValueError(\"money cannot be negative\")\n        self._cents = cents\n\n    @property\n    def cents(self) -> int:\n        \"\"\"Return the stored cents value.\"\"\"\n        return self._cents\n\n    def __add__(self, other: Money) -> Money:\n        \"\"\"Return a new Money equal to ``self + other``.\"\"\"\n        if not isinstance(other, Money):\n            raise TypeError(\"can only add Money to Money\")\n        return Money(self._cents + other._cents)\n\n    def __sub__(self, other: Money) -> Money:\n        \"\"\"Return a new Money equal to ``self - other``.\n\n        Raises:\n            TypeError: if ``other`` is not :class:`Money`.\n            ValueError: if the result would be negative.\n        \"\"\"\n        if not isinstance(other, Money):\n            raise TypeError(\"can only subtract Money from Money\")\n        difference = self._cents - other._cents\n        if difference < 0:\n            raise ValueError(\"subtraction would be negative\")\n        return Money(difference)\n\n    def __mul__(self, factor: int) -> Money:\n        \"\"\"Return ``self`` multiplied by a non-negative integer.\"\"\"\n        if isinstance(factor, bool) or not isinstance(factor, int):\n            raise TypeError(\"factor must be int\")\n        if factor < 0:\n            raise ValueError(\"factor cannot be negative\")\n        return Money(self._cents * factor)\n\n    def __rmul__(self, factor: int) -> Money:\n        \"\"\"Support ``factor * Money`` by delegating to :meth:`__mul__`.\"\"\"\n        return self.__mul__(factor)\n\n    def __eq__(self, other: object) -> bool:\n        \"\"\"Return True if ``other`` is Money with equal cents.\"\"\"\n        if not isinstance(other, Money):\n            return NotImplemented\n        return self._cents == other._cents\n\n    def __lt__(self, other: Money) -> bool:\n        \"\"\"Return True if ``self`` is strictly less than ``other``.\"\"\"\n        if not isinstance(other, Money):\n            return NotImplemented\n        return self._cents < other._cents\n\n    def __le__(self, other: Money) -> bool:\n        \"\"\"Return True if ``self`` is less than or equal to ``other``.\"\"\"\n        if not isinstance(other, Money):\n            return NotImplemented\n        return self._cents <= other._cents\n\n    def __hash__(self) -> int:\n        \"\"\"Hash by the type name and cents value.\"\"\"\n        return hash((\"Money\", self._cents))\n\n    def __repr__(self) -> str:\n        \"\"\"Return a developer-friendly representation.\"\"\"\n        return f\"Money({self._cents})\"\n\n    def __str__(self) -> str:\n        \"\"\"Render the amount as a ``$X.YY`` string.\"\"\"\n        return format_cents(self._cents)\n\n    def __bool__(self) -> bool:\n        pass\n\n\nclass Product(Entity):\n    \"\"\"Catalog item.\"\"\"\n\n    def __init__(self, sku: str, name: str, category: Category, unit_price: Money) -> None:\n        \"\"\"Create a product after validating its SKU, name, category, and price.\"\"\"\n        sku = normalize_sku(sku)\n        if not isinstance(name, str) or name.strip() == \"\":\n            raise ValueError(\"name required\")\n        if not isinstance(category, Category):\n            raise TypeError(\"category must be Category\")\n        if not isinstance(unit_price, Money):\n            raise TypeError(\"unit_price must be Money\")\n        self._sku = sku\n        self._name = name\n        self._category = category\n        self._unit_price = unit_price\n\n    @property\n    def sku(self) -> str:\n        \"\"\"Return the product SKU.\"\"\"\n        return self._sku\n\n    @property\n    def name(self) -> str:\n        \"\"\"Return the product name.\"\"\"\n        return self._name\n\n    @property\n    def category(self) -> Category:\n        \"\"\"Return the product category.\"\"\"\n        return self._category\n\n    @property\n    def unit_price(self) -> Money:\n        \"\"\"Return the product unit price.\"\"\"\n        return self._unit_price\n\n    def identity(self) -> str:\n        \"\"\"Return the SKU as the entity identity.\"\"\"\n        return self._sku\n\n    def with_price(self, new_price: Money) -> Product:\n        \"\"\"Return a copy of this product with an updated unit price.\"\"\"\n        if not isinstance(new_price, Money):\n            raise TypeError(\"new_price must be Money\")\n        return Product(self._sku, self._name, self._category, new_price)\n\n    @classmethod\n    def from_dict(cls, data: Mapping[str, object]) -> Product:\n        \"\"\"Build a product from a mapping with keys sku, name, category, unit_price_cents.\"\"\"\n        for key in (\"sku\", \"name\", \"category\", \"unit_price_cents\"):\n            if key not in data:\n                raise KeyError(key)\n        raw_category = data[\"category\"]\n        if isinstance(raw_category, str):\n            category = Category.from_label(raw_category)\n        elif isinstance(raw_category, Category):\n            category = raw_category\n        else:\n            raise TypeError(\"category must be str or Category\")\n        unit_price = Money(data[\"unit_price_cents\"])\n        return cls(data[\"sku\"], data[\"name\"], category, unit_price)\n\n    @staticmethod\n    def is_valid_name(name: str) -> bool:\n        \"\"\"Return True if ``name`` is a string of 1..80 non-blank characters.\"\"\"\n        if not isinstance(name, str):\n            return False\n        return 1 <= len(name.strip()) <= 80\n\n\nclass LineItem:\n    \"\"\"One SKU with quantity and unit price.\"\"\"\n\n    def __init__(self, sku: str, quantity: int, unit_price: Money) -> None:\n        \"\"\"Create a line item after validating its SKU, quantity, and price.\"\"\"\n        sku = normalize_sku(sku)\n        quantity = ensure_positive_int(quantity, \"quantity\")\n        if not isinstance(unit_price, Money):\n            raise TypeError(\"unit_price must be Money\")\n        self._sku = sku\n        self._quantity = quantity\n        self._unit_price = unit_price\n\n    @property\n    def sku(self) -> str:\n        \"\"\"Return the line item SKU.\"\"\"\n        return self._sku\n\n    @property\n    def quantity(self) -> int:\n        \"\"\"Return the line item quantity.\"\"\"\n        return self._quantity\n\n    @property\n    def unit_price(self) -> Money:\n        \"\"\"Return the unit price.\"\"\"\n        return self._unit_price\n\n    @property\n    def subtotal(self) -> Money:\n        \"\"\"Return the line item subtotal (unit price times quantity).\"\"\"\n        return self._unit_price * self._quantity\n\n    def with_quantity(self, quantity: int) -> LineItem:\n        \"\"\"Return a copy of this line item with a new quantity.\"\"\"\n        return LineItem(self._sku, quantity, self._unit_price)\n\n    def __eq__(self, other: object) -> bool:\n        \"\"\"Compare SKU, quantity, and unit price for equality.\"\"\"\n        if not isinstance(other, LineItem):\n            return NotImplemented\n        return (self._sku, self._quantity, self._unit_price) == (\n            other._sku,\n            other._quantity,\n            other._unit_price,\n        )\n\n    def __hash__(self) -> int:\n        \"\"\"Hash by SKU and quantity.\"\"\"\n        return hash((self._sku, self._quantity))\n\n    def __repr__(self) -> str:\n        \"\"\"Return a developer-friendly representation.\"\"\"\n        return f\"LineItem({self._sku!r}, {self._quantity}, {self._unit_price!r})\"\n\n\nclass Customer(Entity):\n    \"\"\"Buyer with a credit limit. Balance is the amount owed.\"\"\"\n\n    def __init__(self, customer_id: str, name: str, credit_limit: Money = Money(0)) -> None:\n        \"\"\"Create a customer with the given identity, name, and credit limit.\"\"\"\n        if not isinstance(customer_id, str) or customer_id.strip() == \"\":\n            raise ValueError(\"customer_id required\")\n        if not isinstance(name, str) or name.strip() == \"\":\n            raise ValueError(\"name required\")\n        if not isinstance(credit_limit, Money):\n            raise TypeError(\"credit_limit must be Money\")\n        self._customer_id = customer_id\n        self._name = name\n        self._credit_limit = credit_limit\n        self._balance = Money(0)\n\n    @property\n    def customer_id(self) -> str:\n        \"\"\"Return the customer identity.\"\"\"\n        return self._customer_id\n\n    @property\n    def name(self) -> str:\n        \"\"\"Return the customer name.\"\"\"\n        return self._name\n\n    @property\n    def credit_limit(self) -> Money:\n        \"\"\"Return the credit limit.\"\"\"\n        return self._credit_limit\n\n    @property\n    def balance(self) -> Money:\n        \"\"\"Return the current outstanding balance.\"\"\"\n        return self._balance\n\n    def identity(self) -> str:\n        \"\"\"Return the customer_id as the entity identity.\"\"\"\n        return self._customer_id\n\n    def can_afford(self, total: Money) -> bool:\n        pass\n\n    def charge(self, total: Money) -> None:\n        \"\"\"Increase the balance by ``total``, raising if the limit would be exceeded.\"\"\"\n        if not self.can_afford(total):\n            raise ValueError(\"credit limit exceeded\")\n        self._balance = self._balance + total\n",
+    "playground/playground/pricing.py": "\"\"\"Pricing strategies for computing order totals.\"\"\"\n\nfrom __future__ import annotations\n\nfrom typing import Sequence\n\nfrom .base import PricingStrategy\nfrom .models import LineItem, Money\nfrom .util import ensure_positive_int\n\n\nclass FlatPricing(PricingStrategy):\n    \"\"\"Sum of subtotals plus flat tax in basis points.\"\"\"\n\n    def __init__(self, tax_bps: int = 0) -> None:\n        \"\"\"Create a pricing strategy with a tax rate in ``tax_bps`` basis points.\"\"\"\n        if isinstance(tax_bps, bool) or not isinstance(tax_bps, int):\n            raise TypeError(\"tax_bps must be int\")\n        if tax_bps < 0 or tax_bps > 10000:\n            raise ValueError(\"tax_bps must be 0..10000\")\n        self._tax_bps = tax_bps\n\n    @property\n    def tax_bps(self) -> int:\n        \"\"\"Return the tax rate in basis points.\"\"\"\n        return self._tax_bps\n\n    def price(self, items: Sequence[LineItem]) -> Money:\n        \"\"\"Return the subtotal plus the configured flat tax.\"\"\"\n        subtotal = self._sum_subtotals(items)\n        if self._tax_bps == 0:\n            return subtotal\n        tax = Money(subtotal.cents * self._tax_bps // 10000)\n        return subtotal + tax\n\n\nclass BulkDiscountPricing(PricingStrategy):\n    \"\"\"Wraps another strategy; applies a percent discount when total quantity meets a threshold.\"\"\"\n\n    def __init__(self, base: PricingStrategy, threshold: int, percent_off: int) -> None:\n        \"\"\"Create a strategy that discounts ``base`` totals above ``threshold`` quantity.\"\"\"\n        if not isinstance(base, PricingStrategy):\n            raise TypeError(\"base must be PricingStrategy\")\n        threshold = ensure_positive_int(threshold, \"threshold\")\n        if isinstance(percent_off, bool) or not isinstance(percent_off, int):\n            raise TypeError(\"percent_off must be int\")\n        if percent_off < 0 or percent_off > 100:\n            raise ValueError(\"percent_off must be 0..100\")\n        self._base = base\n        self._threshold = threshold\n        self._percent_off = percent_off\n\n    @property\n    def threshold(self) -> int:\n        \"\"\"Return the qualifying total quantity.\"\"\"\n        return self._threshold\n\n    @property\n    def percent_off(self) -> int:\n        \"\"\"Return the discount percentage.\"\"\"\n        return self._percent_off\n\n    def price(self, items: Sequence[LineItem]) -> Money:\n        pass\n\n    def __repr__(self) -> str:\n        \"\"\"Return a developer-friendly representation.\"\"\"\n        return f\"BulkDiscountPricing(threshold={self._threshold}, percent_off={self._percent_off})\"\n",
+    "playground/playground/events.py": "\"\"\"Synchronous in-process event bus for the playground package.\"\"\"\n\nfrom __future__ import annotations\n\nfrom collections.abc import Mapping\nfrom typing import Callable, Dict, List\n\nfrom .enums import EventType\n\n\nclass EventBus:\n    \"\"\"Synchronous publish/subscribe keyed by :class:`EventType`.\"\"\"\n\n    def __init__(self) -> None:\n        \"\"\"Initialise an empty handler registry.\"\"\"\n        self._handlers: Dict[EventType, List[Callable[..., None]]] = {}\n\n    def subscribe(self, event_type: EventType, handler: Callable[..., None]) -> None:\n        \"\"\"Register ``handler`` to be called when ``event_type`` is published.\"\"\"\n        if not isinstance(event_type, EventType):\n            raise TypeError(\"event_type must be EventType\")\n        if not callable(handler):\n            raise TypeError(\"handler must be callable\")\n        self._handlers.setdefault(event_type, []).append(handler)\n\n    def unsubscribe(self, event_type: EventType, handler: Callable[..., None]) -> bool:\n        \"\"\"Remove ``handler`` from ``event_type``; return whether it was present.\"\"\"\n        handlers = self._handlers.get(event_type, [])\n        if handler not in handlers:\n            return False\n        handlers.remove(handler)\n        return True\n\n    def publish(self, event_type: EventType, payload: Mapping[str, object]) -> int:\n        \"\"\"Invoke every handler subscribed to ``event_type`` with ``payload``.\n\n        Returns the number of handlers invoked.\n        \"\"\"\n        if not isinstance(event_type, EventType):\n            raise TypeError(\"event_type must be EventType\")\n        if not isinstance(payload, Mapping):\n            raise TypeError(\"payload must be a Mapping\")\n        count = 0\n        for handler in list(self._handlers.get(event_type, [])):\n            handler(payload)\n            count += 1\n        return count\n\n    def __len__(self) -> int:\n        \"\"\"Return the total number of registered handlers across all event types.\"\"\"\n        return sum(len(handlers) for handlers in self._handlers.values())\n\n    def __contains__(self, event_type: object) -> bool:\n        pass\n"
+  },
+  "final_file_hashes": {
+    "playground/playground/enums.py": "5b809dc3627455e7751c31eb14816c777efcd602cfa94e00468076881c9e6e5e",
+    "playground/playground/inventory.py": "1dab3cbe5abefdb797056549c2cb77d8a10e7787c905aad1aa9d4e1d1ffe265a",
+    "playground/playground/orders.py": "2d3d5b6c05c8ccce4c65743116be57a414541d92e9e414a48716e94bb7947470",
+    "playground/playground/models.py": "3c8937b1e6d548958219bb025879ab22658e96686e27590c3b2575370a6b3e6e",
+    "playground/playground/pricing.py": "2644761a423de54bf6f07d5d93ea17983c768577b22066e6044667a74b2e7004",
+    "playground/playground/events.py": "73a31e69632f62a49aeeda5800963a69ddea875908046285147bb58d308ab36a"
+  },
+  "tasks": [
+    {
+      "file": "playground/playground/enums.py",
+      "class": "OrderStatus",
+      "method": "is_terminal",
+      "task_text": "\"\"\"True when the status ends further transitions.\"\"\"",
+      "target_signature": "    @property\n    def is_terminal(self) -> bool:",
+      "target_context_lines": [
+        45,
+        47
+      ],
+      "original_method_source": "def is_terminal(self) -> bool:\n        pass",
+      "generated_body": "return self in (OrderStatus.SHIPPED, OrderStatus.CANCELLED)",
+      "retrieved_chunks": [
+        {
+          "chunk_id": "6c03c92708c8f53a",
+          "similarity": 0.7316798454300434,
+          "file_path": "playground/playground/enums.py",
+          "symbol": "OrderStatus",
+          "category": "source"
+        },
+        {
+          "chunk_id": "fd8e6f6ec1c83a72",
+          "similarity": 0.7283788727216548,
+          "file_path": "playground/tests/test_enums.py",
+          "symbol": "OrderStatusTests",
+          "category": "test"
+        },
+        {
+          "chunk_id": "7c1ad68464d45dfc",
+          "similarity": 0.6503379198354288,
+          "file_path": "playground/tests/test_orders.py",
+          "symbol": "OrderStateMachineTests",
+          "category": "test"
+        },
+        {
+          "chunk_id": "b87483929ca1a739",
+          "similarity": 0.6442023743043993,
+          "file_path": "playground/playground/orders.py",
+          "symbol": "OrderStateMachine",
+          "category": "source"
+        },
+        {
+          "chunk_id": "bea9480e3ee84fef",
+          "similarity": 0.6272524289055059,
+          "file_path": "playground/tests/test_orders.py",
+          "symbol": "OrderAdvanceTests",
+          "category": "test"
+        }
+      ],
+      "prompt_sha256": "ec299822348beee9507174f949072b5fa49608f46dfba6a0da10ca3bf760493b",
+      "response_id": "resp_001baf2e59247a1a006af8b6db21a487d2a3f6ad6c35050c61",
+      "response_model": "gpt-5-mini-2025-08-07",
+      "usage": {
+        "input_tokens": 1888,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0,
+          "cache_write_tokens_details": {
+            "ttl_12h_tokens": 0,
+            "ttl_30m_tokens": 0
+          }
+        },
+        "output_tokens": 237,
+        "output_tokens_details": {
+          "reasoning_tokens": 192
+        },
+        "total_tokens": 2125
+      },
+      "file_sha256_after": "5b809dc3627455e7751c31eb14816c777efcd602cfa94e00468076881c9e6e5e",
+      "status": "written_after_syntax_validation"
+    },
+    {
+      "file": "playground/playground/inventory.py",
+      "class": "InventoryLedger",
+      "method": "__contains__",
+      "task_text": "\"\"\"Return whether ``sku`` normalises to a SKU with positive on-hand stock.\"\"\"",
+      "target_signature": "    def __contains__(self, sku: object) -> bool:",
+      "target_context_lines": [
+        71,
+        72
+      ],
+      "original_method_source": "def __contains__(self, sku: object) -> bool:\n        pass",
+      "generated_body": "if not isinstance(sku, str):\n    return False\ntry:\n    sku = normalize_sku(sku)\nexcept ValueError:\n    return False\nif sku not in self._product_repo:\n    return False\nreturn sku in self._on_hand",
+      "retrieved_chunks": [
+        {
+          "chunk_id": "830a65139b51343b",
+          "similarity": 0.7380497932778964,
+          "file_path": "playground/tests/test_inventory.py",
+          "symbol": "InventoryLedgerStockTests",
+          "category": "test"
+        },
+        {
+          "chunk_id": "20d3e13ecc6299fd",
+          "similarity": 0.7048117145965936,
+          "file_path": "playground/tests/test_inventory.py",
+          "symbol": "InventoryLedgerContainsLenIterTests",
+          "category": "test"
+        },
+        {
+          "chunk_id": "3ee090b2aa2870f6",
+          "similarity": 0.6940330195925019,
+          "file_path": "playground/tests/test_inventory.py",
+          "symbol": "InventoryErrorHierarchyTests",
+          "category": "test"
+        },
+        {
+          "chunk_id": "3fcb5d884f27c49e",
+          "similarity": 0.6928547285124166,
+          "file_path": "playground/playground/inventory.py",
+          "symbol": "<module>",
+          "category": "source"
+        },
+        {
+          "chunk_id": "439e9f56ec0d9c97",
+          "similarity": 0.6828304857611599,
+          "file_path": "playground/tests/test_inventory.py",
+          "symbol": "WarehouseTests",
+          "category": "test"
+        }
+      ],
+      "prompt_sha256": "455a8232f44dc39633f682fe263f0ac3b6796e6a7efba852d9f069db0fc8faf9",
+      "response_id": "resp_0eb442324bb9da99006af8b6df146487d28cb40bc21205ba6a",
+      "response_model": "gpt-5-mini-2025-08-07",
+      "usage": {
+        "input_tokens": 3060,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 2944,
+          "cache_write_tokens_details": {
+            "ttl_12h_tokens": 0,
+            "ttl_30m_tokens": 0
+          }
+        },
+        "output_tokens": 490,
+        "output_tokens_details": {
+          "reasoning_tokens": 384
+        },
+        "total_tokens": 3550
+      },
+      "file_sha256_after": "1dd961f2a0ff4e86c5d2396627ae54e9ff5e87b68f0189f2cd1a11247d7ee730",
+      "status": "written_after_syntax_validation"
+    },
+    {
+      "file": "playground/playground/inventory.py",
+      "class": "Warehouse",
+      "method": "stock_report",
+      "task_text": "\"\"\"Return a mapping of SKU to available quantity.\"\"\"",
+      "target_signature": "    def stock_report(self) -> Dict[str, int]:",
+      "target_context_lines": [
+        158,
+        159
+      ],
+      "original_method_source": "def stock_report(self) -> Dict[str, int]:\n        pass",
+      "generated_body": "report: Dict[str, int] = {}\nfor sku in self._ledger:\n    qty = self._ledger.available(sku)\n    if qty > 0:\n        report[sku] = qty\nreturn report",
+      "retrieved_chunks": [
+        {
+          "chunk_id": "439e9f56ec0d9c97",
+          "similarity": 0.7122743909750171,
+          "file_path": "playground/tests/test_inventory.py",
+          "symbol": "WarehouseTests",
+          "category": "test"
+        },
+        {
+          "chunk_id": "830a65139b51343b",
+          "similarity": 0.7042483835252779,
+          "file_path": "playground/tests/test_inventory.py",
+          "symbol": "InventoryLedgerStockTests",
+          "category": "test"
+        },
+        {
+          "chunk_id": "3fcb5d884f27c49e",
+          "similarity": 0.6935816759201225,
+          "file_path": "playground/playground/inventory.py",
+          "symbol": "<module>",
+          "category": "source"
+        },
+        {
+          "chunk_id": "86e6dc2e307da278",
+          "similarity": 0.6905722702158719,
+          "file_path": "playground/playground/exceptions.py",
+          "symbol": "OutOfStockError",
+          "category": "source"
+        },
+        {
+          "chunk_id": "be55c409a56aaece",
+          "similarity": 0.6734893142064288,
+          "file_path": "playground/tests/test_inventory.py",
+          "symbol": "_make_repo",
+          "category": "test"
+        }
+      ],
+      "prompt_sha256": "3e6e720e63692a015639e79a3e895c76a0b1dc0009c55e5d65e4205edaa4794f",
+      "response_id": "resp_0be36216f80b60af006af8b6e55edc87d2b8056b3dc143224b",
+      "response_model": "gpt-5-mini-2025-08-07",
+      "usage": {
+        "input_tokens": 2061,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0,
+          "cache_write_tokens_details": {
+            "ttl_12h_tokens": 0,
+            "ttl_30m_tokens": 0
+          }
+        },
+        "output_tokens": 369,
+        "output_tokens_details": {
+          "reasoning_tokens": 256
+        },
+        "total_tokens": 2430
+      },
+      "file_sha256_after": "1dab3cbe5abefdb797056549c2cb77d8a10e7787c905aad1aa9d4e1d1ffe265a",
+      "status": "written_after_syntax_validation"
+    },
+    {
+      "file": "playground/playground/orders.py",
+      "class": "OrderStateMachine",
+      "method": "transition",
+      "task_text": "\"\"\"Return ``target`` if the transition is allowed, else raise.\"\"\"",
+      "target_signature": "    def transition(self, source: OrderStatus, target: OrderStatus) -> OrderStatus:",
+      "target_context_lines": [
+        35,
+        36
+      ],
+      "original_method_source": "def transition(self, source: OrderStatus, target: OrderStatus) -> OrderStatus:\n        pass",
+      "generated_body": "if self.can_transition(source, target):\n    return target\nraise InvalidTransitionError(source, target)",
+      "retrieved_chunks": [
+        {
+          "chunk_id": "b87483929ca1a739",
+          "similarity": 0.7689897832690678,
+          "file_path": "playground/playground/orders.py",
+          "symbol": "OrderStateMachine",
+          "category": "source"
+        },
+        {
+          "chunk_id": "7c1ad68464d45dfc",
+          "similarity": 0.7551685570240039,
+          "file_path": "playground/tests/test_orders.py",
+          "symbol": "OrderStateMachineTests",
+          "category": "test"
+        },
+        {
+          "chunk_id": "e53db43b6f1f44b4",
+          "similarity": 0.6919745826656989,
+          "file_path": "playground/playground/orders.py",
+          "symbol": "<module>",
+          "category": "source"
+        },
+        {
+          "chunk_id": "bea9480e3ee84fef",
+          "similarity": 0.6775722404909781,
+          "file_path": "playground/tests/test_orders.py",
+          "symbol": "OrderAdvanceTests",
+          "category": "test"
+        },
+        {
+          "chunk_id": "ec13128c4b928115",
+          "similarity": 0.6608824032879048,
+          "file_path": "playground/tests/test_orders.py",
+          "symbol": "_order",
+          "category": "test"
+        }
+      ],
+      "prompt_sha256": "457cc645ed9d6996b2dccbb3036824e358278144b4a96c7510bda25cd9a6e3a5",
+      "response_id": "resp_026e972483ed25a1006af8b6eab56887d2abdc2a9a3ed2eae2",
+      "response_model": "gpt-5-mini-2025-08-07",
+      "usage": {
+        "input_tokens": 1991,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0,
+          "cache_write_tokens_details": {
+            "ttl_12h_tokens": 0,
+            "ttl_30m_tokens": 0
+          }
+        },
+        "output_tokens": 369,
+        "output_tokens_details": {
+          "reasoning_tokens": 256
+        },
+        "total_tokens": 2360
+      },
+      "file_sha256_after": "c230a73438421331b88361343218e10532eed9535600c4abd7a307f746765bf0",
+      "status": "written_after_syntax_validation"
+    },
+    {
+      "file": "playground/playground/orders.py",
+      "class": "OrderLog",
+      "method": "by_status",
+      "task_text": "\"\"\"Yield orders whose status matches ``status``.\"\"\"",
+      "target_signature": "    def by_status(self, status: OrderStatus) -> Iterator[Order]:",
+      "target_context_lines": [
+        185,
+        186
+      ],
+      "original_method_source": "def by_status(self, status: OrderStatus) -> Iterator[Order]:\n        pass",
+      "generated_body": "if not isinstance(status, OrderStatus):\n    raise TypeError(\"status must be OrderStatus\")\nfor o in self._orders:\n    if o.status is status:\n        yield o",
+      "retrieved_chunks": [
+        {
+          "chunk_id": "36bcdd904f30d6a7",
+          "similarity": 0.7059335193311358,
+          "file_path": "playground/tests/test_orders.py",
+          "symbol": "OrderLogTests",
+          "category": "test"
+        },
+        {
+          "chunk_id": "ec13128c4b928115",
+          "similarity": 0.6834300164267044,
+          "file_path": "playground/tests/test_orders.py",
+          "symbol": "_order",
+          "category": "test"
+        },
+        {
+          "chunk_id": "ad1dbd322f3acc52",
+          "similarity": 0.6628211426182294,
+          "file_path": "playground/tests/test_orders.py",
+          "symbol": "OrderEqualityTests",
+          "category": "test"
+        },
+        {
+          "chunk_id": "b87483929ca1a739",
+          "similarity": 0.6622791908862184,
+          "file_path": "playground/playground/orders.py",
+          "symbol": "OrderStateMachine",
+          "category": "source"
+        },
+        {
+          "chunk_id": "bea9480e3ee84fef",
+          "similarity": 0.654172257777969,
+          "file_path": "playground/tests/test_orders.py",
+          "symbol": "OrderAdvanceTests",
+          "category": "test"
+        }
+      ],
+      "prompt_sha256": "218cd14df04427b887630f74f929a8ff86fed55deddfb9b7e39588309fbcca96",
+      "response_id": "resp_0412104f846d7c7b006af8b6f0b2e487d2810dfb8170a3bc86",
+      "response_model": "gpt-5-mini-2025-08-07",
+      "usage": {
+        "input_tokens": 2361,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0,
+          "cache_write_tokens_details": {
+            "ttl_12h_tokens": 0,
+            "ttl_30m_tokens": 0
+          }
+        },
+        "output_tokens": 352,
+        "output_tokens_details": {
+          "reasoning_tokens": 256
+        },
+        "total_tokens": 2713
+      },
+      "file_sha256_after": "3d3f515d6ca4f193df6b376c907c3b5c1b4987f4d86c183fdd246555d3621fee",
+      "status": "written_after_syntax_validation"
+    },
+    {
+      "file": "playground/playground/models.py",
+      "class": "Customer",
+      "method": "can_afford",
+      "task_text": "\"\"\"Return True if ``balance + total`` does not exceed the credit limit.\"\"\"",
+      "target_signature": "    def can_afford(self, total: Money) -> bool:",
+      "target_context_lines": [
+        261,
+        262
+      ],
+      "original_method_source": "def can_afford(self, total: Money) -> bool:\n        pass",
+      "generated_body": "if not isinstance(total, Money):\n    raise TypeError(\"total must be Money\")\nreturn (self._balance + total) <= self._credit_limit",
+      "retrieved_chunks": [
+        {
+          "chunk_id": "0c1b45cc03ed2c0d",
+          "similarity": 0.6888713764010619,
+          "file_path": "playground/tests/test_models.py",
+          "symbol": "CustomerTests",
+          "category": "test"
+        },
+        {
+          "chunk_id": "44ba27cffa4ebeb2",
+          "similarity": 0.6513981431021134,
+          "file_path": "playground/tests/test_orders.py",
+          "symbol": "_customer",
+          "category": "test"
+        },
+        {
+          "chunk_id": "51a6adef1176c50c",
+          "similarity": 0.6398836249225205,
+          "file_path": "playground/playground/models.py",
+          "symbol": "Customer",
+          "category": "source"
+        },
+        {
+          "chunk_id": "d0a3bba980c279bf",
+          "similarity": 0.5908510651152844,
+          "file_path": "playground/tests/test_orders.py",
+          "symbol": "OrderTotalTests",
+          "category": "test"
+        },
+        {
+          "chunk_id": "cf96f752d57222fd",
+          "similarity": 0.5776722466355877,
+          "file_path": "playground/tests/test_models.py",
+          "symbol": "MoneyConstructionTests",
+          "category": "test"
+        }
+      ],
+      "prompt_sha256": "b4c11a05aec0c6d2512c6899ca9915318adbe8b5511eee114f02a0a2b6ac4b93",
+      "response_id": "resp_0a40e692f153197a006af8b6f52d1c87d2879aedf61a273821",
+      "response_model": "gpt-5-mini-2025-08-07",
+      "usage": {
+        "input_tokens": 2670,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0,
+          "cache_write_tokens_details": {
+            "ttl_12h_tokens": 0,
+            "ttl_30m_tokens": 0
+          }
+        },
+        "output_tokens": 208,
+        "output_tokens_details": {
+          "reasoning_tokens": 128
+        },
+        "total_tokens": 2878
+      },
+      "file_sha256_after": "798a978b3332cfe6b0e6adf1930b9cb0c8a4f764b56fa1fefea25432b43c913f",
+      "status": "written_after_syntax_validation"
+    },
+    {
+      "file": "playground/playground/orders.py",
+      "class": "Order",
+      "method": "__len__",
+      "task_text": "\"\"\"Return the number of line items.\"\"\"",
+      "target_signature": "    def __len__(self) -> int:",
+      "target_context_lines": [
+        105,
+        106
+      ],
+      "original_method_source": "def __len__(self) -> int:\n        pass",
+      "generated_body": "return len(self._items)",
+      "retrieved_chunks": [
+        {
+          "chunk_id": "def9013f02a926a8",
+          "similarity": 0.6579331606077383,
+          "file_path": "playground/tests/test_orders.py",
+          "symbol": "OrderContainerTests",
+          "category": "test"
+        },
+        {
+          "chunk_id": "ec13128c4b928115",
+          "similarity": 0.6442508842614012,
+          "file_path": "playground/tests/test_orders.py",
+          "symbol": "_order",
+          "category": "test"
+        },
+        {
+          "chunk_id": "d0a3bba980c279bf",
+          "similarity": 0.6268393120051767,
+          "file_path": "playground/tests/test_orders.py",
+          "symbol": "OrderTotalTests",
+          "category": "test"
+        },
+        {
+          "chunk_id": "c02b2d493e14d0f7",
+          "similarity": 0.6119771784539789,
+          "file_path": "playground/tests/test_orders.py",
+          "symbol": "<module>",
+          "category": "test"
+        },
+        {
+          "chunk_id": "36bcdd904f30d6a7",
+          "similarity": 0.6075809662482273,
+          "file_path": "playground/tests/test_orders.py",
+          "symbol": "OrderLogTests",
+          "category": "test"
+        }
+      ],
+      "prompt_sha256": "49be7678022f47129e84c76c739900cfca733d5a5ca2a8651951115affc7f84f",
+      "response_id": "resp_0a45f31af8ebc236006af8b6f8528487d2b46908e32f9ab02b",
+      "response_model": "gpt-5-mini-2025-08-07",
+      "usage": {
+        "input_tokens": 2508,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0,
+          "cache_write_tokens_details": {
+            "ttl_12h_tokens": 0,
+            "ttl_30m_tokens": 0
+          }
+        },
+        "output_tokens": 107,
+        "output_tokens_details": {
+          "reasoning_tokens": 64
+        },
+        "total_tokens": 2615
+      },
+      "file_sha256_after": "2d3d5b6c05c8ccce4c65743116be57a414541d92e9e414a48716e94bb7947470",
+      "status": "written_after_syntax_validation"
+    },
+    {
+      "file": "playground/playground/pricing.py",
+      "class": "BulkDiscountPricing",
+      "method": "price",
+      "task_text": "\"\"\"Return the base price, less the discount if the quantity qualifies.\"\"\"",
+      "target_signature": "    def price(self, items: Sequence[LineItem]) -> Money:",
+      "target_context_lines": [
+        63,
+        64
+      ],
+      "original_method_source": "def price(self, items: Sequence[LineItem]) -> Money:\n        pass",
+      "generated_body": "total = sum(getattr(item, \"quantity\") for item in items)\nbase = self._base.price(items)\nif total < self._threshold or self._percent_off == 0:\n    return base\ndiscount = (base.amount * self._percent_off) // 100\nreturn Money(base.amount - discount)",
+      "retrieved_chunks": [
+        {
+          "chunk_id": "f9e96edcd646fce1",
+          "similarity": 0.7361628053877192,
+          "file_path": "playground/tests/test_pricing.py",
+          "symbol": "BulkDiscountPriceTests",
+          "category": "test"
+        },
+        {
+          "chunk_id": "73b5aba1bed10f69",
+          "similarity": 0.7266498698719643,
+          "file_path": "playground/tests/test_pricing.py",
+          "symbol": "BulkDiscountConstructionTests",
+          "category": "test"
+        },
+        {
+          "chunk_id": "997b1266673c1d4b",
+          "similarity": 0.7142968148263105,
+          "file_path": "playground/tests/test_base.py",
+          "symbol": "_FlatPricing",
+          "category": "test"
+        },
+        {
+          "chunk_id": "8299f60bacc4da5c",
+          "similarity": 0.6910537259443745,
+          "file_path": "playground/tests/test_pricing.py",
+          "symbol": "<module>",
+          "category": "test"
+        },
+        {
+          "chunk_id": "aa130e8c651ab468",
+          "similarity": 0.6672334984493488,
+          "file_path": "playground/tests/test_pricing.py",
+          "symbol": "FlatPricingPriceTests",
+          "category": "test"
+        }
+      ],
+      "prompt_sha256": "03886b6b4292a3ae0e883cf271f0ff9bafd97d2d20c47733cd372c0454f8c439",
+      "response_id": "resp_0c0b60aa75a43a3b006af8b6fab3a487d2a56486b05c577a3b",
+      "response_model": "gpt-5-mini-2025-08-07",
+      "usage": {
+        "input_tokens": 2313,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0,
+          "cache_write_tokens_details": {
+            "ttl_12h_tokens": 0,
+            "ttl_30m_tokens": 0
+          }
+        },
+        "output_tokens": 630,
+        "output_tokens_details": {
+          "reasoning_tokens": 512
+        },
+        "total_tokens": 2943
+      },
+      "file_sha256_after": "2644761a423de54bf6f07d5d93ea17983c768577b22066e6044667a74b2e7004",
+      "status": "written_after_syntax_validation"
+    },
+    {
+      "file": "playground/playground/events.py",
+      "class": "EventBus",
+      "method": "__contains__",
+      "task_text": "\"\"\"Return whether any handlers are registered for ``event_type``.\"\"\"",
+      "target_signature": "    def __contains__(self, event_type: object) -> bool:",
+      "target_context_lines": [
+        53,
+        54
+      ],
+      "original_method_source": "def __contains__(self, event_type: object) -> bool:\n        pass",
+      "generated_body": "if not isinstance(event_type, EventType):\n    return False\nreturn bool(self._handlers.get(event_type, []))",
+      "retrieved_chunks": [
+        {
+          "chunk_id": "8e2bc5dee577c1b3",
+          "similarity": 0.7698740247287899,
+          "file_path": "playground/tests/test_events.py",
+          "symbol": "EventBusContainsTests",
+          "category": "test"
+        },
+        {
+          "chunk_id": "048c18865314b571",
+          "similarity": 0.7013102760701129,
+          "file_path": "playground/tests/test_events.py",
+          "symbol": "EventBusSubscribeTests",
+          "category": "test"
+        },
+        {
+          "chunk_id": "6515f94747eb690d",
+          "similarity": 0.6795328925851553,
+          "file_path": "playground/tests/test_events.py",
+          "symbol": "EventBusUnsubscribeTests",
+          "category": "test"
+        },
+        {
+          "chunk_id": "bd676495c725a862",
+          "similarity": 0.6740672282511522,
+          "file_path": "playground/tests/test_events.py",
+          "symbol": "<module>",
+          "category": "test"
+        },
+        {
+          "chunk_id": "9de66c1851b9a4f1",
+          "similarity": 0.6524419679441953,
+          "file_path": "playground/playground/events.py",
+          "symbol": "<module>",
+          "category": "source"
+        }
+      ],
+      "prompt_sha256": "e8c2bbe7c2da303b18f701ba24963ca477cc5ce39389bc98fa45d48cff2fc4ad",
+      "response_id": "resp_0007b116a27b5a93006af8b7008d8887d287c5a4f2f8e0d892",
+      "response_model": "gpt-5-mini-2025-08-07",
+      "usage": {
+        "input_tokens": 1834,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0,
+          "cache_write_tokens_details": {
+            "ttl_12h_tokens": 0,
+            "ttl_30m_tokens": 0
+          }
+        },
+        "output_tokens": 227,
+        "output_tokens_details": {
+          "reasoning_tokens": 128
+        },
+        "total_tokens": 2061
+      },
+      "file_sha256_after": "73a31e69632f62a49aeeda5800963a69ddea875908046285147bb58d308ab36a",
+      "status": "written_after_syntax_validation"
+    },
+    {
+      "file": "playground/playground/models.py",
+      "class": "Money",
+      "method": "__bool__",
+      "task_text": "\"\"\"Return True when the amount is non-zero.\"\"\"",
+      "target_signature": "    def __bool__(self) -> bool:",
+      "target_context_lines": [
+        90,
+        91
+      ],
+      "original_method_source": "def __bool__(self) -> bool:\n        pass",
+      "generated_body": "return self._cents != 0",
+      "retrieved_chunks": [
+        {
+          "chunk_id": "1ef99a01ebfa19bd",
+          "similarity": 0.7058655246525982,
+          "file_path": "playground/tests/test_models.py",
+          "symbol": "MoneyMiscTests",
+          "category": "test"
+        },
+        {
+          "chunk_id": "0531b6282bc4d956",
+          "similarity": 0.7007276773209855,
+          "file_path": "playground/tests/test_models.py",
+          "symbol": "MoneyArithmeticTests",
+          "category": "test"
+        },
+        {
+          "chunk_id": "cf96f752d57222fd",
+          "similarity": 0.6974094700525671,
+          "file_path": "playground/tests/test_models.py",
+          "symbol": "MoneyConstructionTests",
+          "category": "test"
+        },
+        {
+          "chunk_id": "574bb58f40d99562",
+          "similarity": 0.6756862802403393,
+          "file_path": "playground/tests/test_models.py",
+          "symbol": "MoneyComparisonTests",
+          "category": "test"
+        },
+        {
+          "chunk_id": "b5db3191968cd187",
+          "similarity": 0.6212051534989518,
+          "file_path": "playground/tests/test_util.py",
+          "symbol": "FormatCentsTests",
+          "category": "test"
+        }
+      ],
+      "prompt_sha256": "0d5cba317eb090b4af1f62ae3d4bb848469d5c6d9d57e72445b2d52447cf3a9b",
+      "response_id": "resp_09c80ad270bec600006af8b704b9e487d2b9058e5ecf344e5a",
+      "response_model": "gpt-5-mini-2025-08-07",
+      "usage": {
+        "input_tokens": 3009,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0,
+          "cache_write_tokens_details": {
+            "ttl_12h_tokens": 0,
+            "ttl_30m_tokens": 0
+          }
+        },
+        "output_tokens": 121,
+        "output_tokens_details": {
+          "reasoning_tokens": 64
+        },
+        "total_tokens": 3130
+      },
+      "file_sha256_after": "3c8937b1e6d548958219bb025879ab22658e96686e27590c3b2575370a6b3e6e",
+      "status": "written_after_syntax_validation"
+    }
+  ]
+}
