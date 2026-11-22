@@ -1,0 +1,13 @@
+developer_instructions = "Before modifying files, briefly explain what you intend to change and why."
+[tui]
+screen_reader_detection_done = true
+
+[tui.model_availability_nux]
+"gpt-6.1-sol" = 2
+
+[projects."/home/REDACTED_USER/Projects/AI4SE_Labs_2026"]
+trust_level = "trusted"
+
+[mcp_servers.text-tools]
+command = "/home/REDACTED_USER/Projects/AI4SE_Labs_2026/Week_08_Dissecting/Assignments/Task_7/mcp_server/.venv/bin/python"
+args = ["/home/REDACTED_USER/Projects/AI4SE_Labs_2026/Week_08_Dissecting/Assignments/Task_7/mcp_server/server.py"]
