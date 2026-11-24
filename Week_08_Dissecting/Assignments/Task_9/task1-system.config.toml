@@ -1,0 +1,4 @@
+model_instructions_file = "/home/REDACTED_USER/Projects/AI4SE_Labs_2026/Week_08_Dissecting/Assignments/Task_1/custom_model_instructions.md"
+
+[tui.model_availability_nux]
+"gpt-6.1-sol" = 4
